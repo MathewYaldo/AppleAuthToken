@@ -18,10 +18,15 @@ After supplying the six-digit access code, the script will attempt to authentica
 If the six-digit 2FA code is correct, then the API responds with a plist file containing the dsid and mmeAuthToken.
 
 **What's the purpose of a dsid and mmeAuthToken?**
+
 A dsid:mmeAuthToken pair can be used to authenticate API requests in place of an email/password. 
 
-**Benefits:**
+Benefits:
 
  - The token can be saved and used for all future API requests.
  - Allows for authentication without 2FA.
  - Can be used in place of an email:password combination so that the password is never revealed. 
+
+**How can I use this in my own project?**
+
+If you are using Python, simply save the Apple2FA file to the same directory as your main python script and import it with `import Apple2FA`. Call `Apple2FA.PromptForVerification(email,password)` to send an alert requesting for the 2FA code to all of the user's devices. Afterwards, call  `Apple2FA.Request(email,password,code)` to actually return the dsid:mmeAuthToken pair.
