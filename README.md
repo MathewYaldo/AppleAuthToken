@@ -20,7 +20,7 @@ If the six-digit 2FA code is correct, then the API responds with a plist file co
 **What's the purpose of a dsid and mmeAuthToken?**
 A dsid:mmeAuthToken pair can be used to authenticate API requests in place of an email/password. 
 
-Benefits:
+**Benefits:**
 
  - The token can be saved and used for all future API requests.
  - Allows for authentication without 2FA.
