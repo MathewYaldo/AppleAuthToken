@@ -29,4 +29,6 @@ Benefits:
 
 ## **How can I use this in my own project?**
 
-If you are using Python, simply save the Apple2FA file to the same directory as your main python script and import it with `import Apple2FA`. Call `Apple2FA.PromptForVerification(email,password)` to send an alert requesting for the 2FA code to all of the user's devices. Afterwards, call  `Apple2FA.Request(email,password,code)` to actually return the dsid:mmeAuthToken pair.
+If you are using Python, simply save the Apple2FA file to the same directory as your main python script and import it with `import Apple2FA`. Call `Apple2FA.PromptForVerification(email,password)` to send an alert requesting for the 2FA code to all of the user's devices. 
+
+Afterwards, call  `Apple2FA.Request(email,password,code)` to actually return the dsid:mmeAuthToken pair.
