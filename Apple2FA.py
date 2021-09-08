@@ -4,7 +4,7 @@ import plistlib
 
 
 
-def PromptForVerification(email,password):
+def PromptForVerification(email, password):
 
     headers = {
         'Host': 'p49-buy.itunes.apple.com',
@@ -28,7 +28,7 @@ def PromptForVerification(email,password):
     )
 
     response = requests.get('https://p49-buy.itunes.apple.com/WebObjects/MZFinance.woa/wa/authenticate', headers=headers, params=params)
-    content  = response.content
+    content = response.content
     pl = plistlib.loads(content)
 
     if response.status_code != 200:
@@ -43,11 +43,10 @@ def PromptForVerification(email,password):
 
 
 
-def Request(email,password,code):
+def Request(email, password, code):
 
     info = email+":"+password+code
-    auth = base64.b64encode(info.encode('utf-8'))
-    auth = auth.decode("utf-8")
+    auth = base64.b64encode(info.encode('utf-8')).decode("utf-8")
 
     headers = {
         'Host': 'setup.icloud.com',
@@ -56,14 +55,13 @@ def Request(email,password,code):
         'Authorization': 'Basic '+auth
     }
 
-
     response = requests.get('https://setup.icloud.com/setup/authenticate/$APPLE_ID$,', headers=headers)
     content = response.content
-    if(response.status_code == 401):
+    if response.status_code == 401:
         raise Exception('Invalid six-digit 2FA code.')
     else:
         pl = plistlib.loads(content)
-        dsid         = pl["appleAccountInfo"]["dsid"]
+        dsid = pl["appleAccountInfo"]["dsid"]
         mmeAuthToken = pl["tokens"]["mmeAuthToken"]
         return dsid+":"+mmeAuthToken
 
@@ -74,6 +72,6 @@ if __name__ == "__main__":
 
     email     = input("Email: ")
     password  = input("Password: ")
-    PromptForVerification(email,password)
+    PromptForVerification(email, password)
     code = input("Six-digit code: ")
-    print(Request(email,password,code))
+    print(Request(email, password, code))
